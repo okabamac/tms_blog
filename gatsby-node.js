@@ -1,30 +1,41 @@
 const path = require(`path`)
 
-// const createTagPages = (createPage, posts) => {
-//   const allTagsIndexTemplate = path.resolve('src/templates/allTagsIndex.js');
-//   const singleTagIndexTemplate = path.resolve('src/templates/singleTagIndex.js');
+const createTagPages = (createPage, posts) => {
+  const allTagsIndexTemplate = path.resolve('src/templates/allTagsIndex.js');
+  const singleTagIndexTemplate = path.resolve('src/templates/singleTagIndex.js');
 
-  // const postsByTag = {};
-  // posts.forEach(({node}) => {
-  //   if (node.frontmatter.tags) {
-  //     node.frontmatter.tags.forEach((tag) => {
-  //       if(!postsByTag[tag]) {
-  //         postsByTag = [];
-  //       }
-  //       postsByTag[tag].push(node)
-  //     })
-  //   }
-  // })
-  // const tags = Object.keys(postsByTag);
+ const postsByTag = {};
+  posts.forEach(({node}) => {
+    if (node.frontmatter.tags) {
+      node.frontmatter.tags.forEach((tag) => {
+        if(!postsByTag[tag]) {
+          postsByTag[tag] = [];
+        }
+        postsByTag[tag].push(node)
+      })
+    }
+  })
 
-  // createPage({
-  //   path: '/tags',
-  //   component: allTagsIndexTemplate,
-  //   context: {
-  //     tags: tags.sort()
-  //   }
-  // })
-// }
+  const tags = Object.keys(postsByTag);
+  createPage({
+    path: '/tags',
+    component: allTagsIndexTemplate,
+    context: {
+      tags: tags.sort(),
+    }
+  })
+  tags.forEach(tagName => {
+    const posts = postsByTag[tagName];
+    createPage({
+      path: `/tags/${tagName}`,
+      component: singleTagIndexTemplate,
+      context: {
+        posts,
+        tagName
+      }
+    })
+  })
+}
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
@@ -55,7 +66,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
   const posts = result.data.allMarkdownRemark.edges;
-  // createTagPages(createPage, posts);
+  createTagPages(createPage, posts);
   posts.forEach(({ node }, index) => {
     const path = node.frontmatter.path;
     createPage({
