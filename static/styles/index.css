@@ -1,0 +1,49 @@
+    html {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+      padding: 0;
+      margin: 0;
+    }
+
+body {
+    height: 100%;
+    font-family: 'Philosopher', serif;
+}
+
+li a {
+    margin: 0.8em;
+    text-decoration: none;
+    color: inherit;
+}
+
+li {
+    margin: 0;
+    margin-bottom: 1em;
+    padding-left: 1em;
+    position: relative;
+    display: inline-block;
+}
+.home-menu li:after {
+      content: '';
+      height: .4em;
+      width: .4em;
+      background: #D2153A;
+      display: block;
+      position: absolute;
+      transform: rotate(45deg);
+      top: .35em;
+      left: 0.6em;
+}
+.home-menu li:nth-child(1):after {
+      content: '';
+      height: 0;
+      width: 0;
+}
+.home-menu li:nth-child(3):after {
+      left: -0.1em;
+}
+
