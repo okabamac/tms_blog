@@ -10,6 +10,7 @@ module.exports = {
     description: "The Mystery of Sound"
   },
   plugins: [
+
     `gatsby-transformer-remark`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -18,6 +19,12 @@ module.exports = {
         path: `${__dirname}/src/pages`,
         name: `pages`,
       }
+    },
+    {
+      resolve: `gatsby-plugin-emotion`,
+      options: {
+        // Accepts all options defined by `babel-plugin-emotion` plugin.
+      },
     }
   ]
 }
