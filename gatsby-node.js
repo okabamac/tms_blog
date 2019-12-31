@@ -1,5 +1,5 @@
-const path = require(`path`)
-
+const path = require(`path`);
+const _ = require('lodash');
 const createTagPages = (createPage, posts) => {
   const allTagsIndexTemplate = path.resolve('src/templates/allTagsIndex.js');
   const singleTagIndexTemplate = path.resolve('src/templates/singleTagIndex.js');
@@ -16,7 +16,8 @@ const createTagPages = (createPage, posts) => {
     }
   })
 
-  const tags = Object.keys(postsByTag);
+  let tags = Object.keys(postsByTag);
+  tags = _.uniq(tags);
   createPage({
     path: '/tags',
     component: allTagsIndexTemplate,
@@ -27,7 +28,7 @@ const createTagPages = (createPage, posts) => {
   tags.forEach(tagName => {
     const posts = postsByTag[tagName];
     createPage({
-      path: `/tags/${tagName}`,
+      path: `/tags/${_.kebabCase(tagName)}/`,
       component: singleTagIndexTemplate,
       context: {
         posts,
@@ -53,7 +54,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
               path
               title
               tags
+              date(formatString: "MMMM DD, YYYY")
             }
+             excerpt
           }
         }
       }

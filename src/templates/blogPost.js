@@ -1,31 +1,62 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { css } from "@emotion/core"
-
+import Layout from "../components/Layout";
 
 const Template = ({data, pageContext}) => {
   const {next, prev } = pageContext;
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
     return (
-    <div className="blog-post-container">
-      <div className="blog-post">
-        <h1>{frontmatter.title}</h1>
-        <h2>{frontmatter.date}</h2>
+      <Layout>
+      <div>
+        <h2>{frontmatter.title}</h2>
+        <div css={css`
+          position: relative
+        `}>
+              <h4 css={css`
+          position: relative;
+          display: inline-block;
+          opacity:  0.4;
+          left: 0;
+        `}>{frontmatter.date}</h4>
+              <h4 css={css`
+           position: absolute;
+           display: inline-block;
+           right: 0;
+           opacity: 0.4;
+        `}>{frontmatter.author}</h4>
+        </div>
         <div
-          className="blog-post-content"
+          css={css`
+            position: relative;
+            top: 1em;
+            line-height: 1.5;
+            word-wrap: break-word;
+          `}
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
         <div css={css`
-                margin-bottom: 1rem;
+        position: relative;
+        top: 2em;
+        `}>
+          <div css={css`
+                position: relative;
+                display: inline-block;
+                left: 0;
               `}>
-          {next && <Link to={next.frontmatter.path}>Next</Link>}
-     </div>
-      <div>
-          {prev && <Link to={prev.frontmatter.path}>Pevious</Link>}
-      </div>
-    </div>
+            {next && <Link to={next.frontmatter.path}>Next</Link>}
+          </div>
+          <div css={css`
+                position: absolute;
+                display: inline-block;
+                right: 0;
+              `}>
+            {prev && <Link to={prev.frontmatter.path}>Pevious</Link>}
+          </div>
+        </div>
+    </Layout>
   )
 }
 export const pageQuery = graphql`
@@ -37,6 +68,7 @@ export const pageQuery = graphql`
         path
         title
         tags
+        author
       }
     }
   }

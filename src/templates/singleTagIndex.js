@@ -1,21 +1,39 @@
 import React from "react"
 import { css } from "@emotion/core"
 import { Link, graphql } from "gatsby"
+import Layout from "../components/Layout";
 
 const SingleTagTemplate = ({ data, pageContext }) => {
     const { posts, tagName  } = pageContext;
+    console.log(pageContext);
     return (
+        <Layout>
         <div>
-           <h3>
+                <h3 css={css`
+                            margin-bottom: 2em;
+                            `}>
                Posts about "{`${tagName}`}"
            </h3>
         <div>
             <ul>
                 {posts.map((post, index) => {
                     return (
-                        <li key={index}>
-                            <Link to={post.frontmatter.path}>
-                                {post.frontmatter.title}
+                        <li css={css`
+                            display: block;
+                            display: list-item;
+                            list-style: square;
+                            color: blue;
+                            margin: 1.5em;
+                            `} key={index}>
+                            <Link css={css`
+                                margin-left: -0.7em;
+                                `} to={post.frontmatter.path}>
+                                {post.frontmatter.title} - <span css={css`
+                                color: #333;
+                                opacity: 0.4;
+                                `}>
+                                    {post.frontmatter.date}
+                                </span>
                             </Link>
                         </li>
                     )
@@ -23,6 +41,7 @@ const SingleTagTemplate = ({ data, pageContext }) => {
             </ul>
         </div>
     </div>
+    </Layout>
     )
 }
 
