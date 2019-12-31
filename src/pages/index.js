@@ -73,10 +73,7 @@ export default () => {
         </div>
            </div>
         <section>
-          <ul className="home-menu" css={css`
-            list-style-type: none;
-            margin-top: 2.5em;
-          `}>
+          <ul className="home-menu">
             <li>
               <Link to='/about'>About</Link>
             </li>
@@ -91,7 +88,7 @@ export default () => {
       </div>
       <section css={css`
         position: absolute;
-        bottom: 10px;
+        top: 85vh;
         font-size: 1.2em;
         width: 100vw;
         `}>
