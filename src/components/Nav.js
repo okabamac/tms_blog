@@ -1,7 +1,25 @@
 import React from "react";
-import { css } from "@emotion/core";
-import { Link, graphql } from "gatsby";
+import  { css } from "@emotion/core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import styled from '@emotion/styled';
+import { Link } from "gatsby";
 
+const ListMenu = styled.li
+  `
+    background: linear-gradient(to right, #f24515 50%, transparent 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all .5s ease-out;
+    margin-top: -0.4em;
+    padding: 0.5em;
+    &:hover {
+        background-position: left bottom;
+    }
+    a {
+        margin: 0.2em;
+    }
+  `
 const Nav = ({ data }) => {
     return (
         <div css={css`
@@ -10,6 +28,8 @@ const Nav = ({ data }) => {
                 padding: 1em 0.5em;
                 height: 50px;
                 width: 100vw;
+                -webkit-box-shadow: 5px 2px 3px 2px #777473;
+                box-shadow: 5px 2px 3px 2px #777473;
                 z-index: 1000;
                 font-weight: 700;
                 background: #f12711;  /* fallback for old browsers */
@@ -31,7 +51,7 @@ const Nav = ({ data }) => {
                 display: inline-block;
                 left: 0;
             `}>
-                        TMS
+                       <FontAwesomeIcon icon={faHome}/> TMS
             </h3>
             </Link>
                 <ul css={css`
@@ -39,21 +59,21 @@ const Nav = ({ data }) => {
                 display: inline-block;
                 right: 1em;
                 `}>
-                    <li>
+                    <ListMenu>
                         <Link to='/blog' activeStyle={{ textDecoration: "underline" }}>
                         Blog
                        </Link>
-                    </li>
-                    <li>
+                    </ListMenu>
+                    <ListMenu>
                         <Link to='/about' activeStyle={{ textDecoration: "underline" }}>
                         About
                        </Link>
-                    </li>
-                    <li>
+                    </ListMenu>
+                    <ListMenu>
                         <Link to='/contact' activeStyle={{ textDecoration: "underline" }}>
                         Contact
                        </Link>
-                    </li>
+                    </ListMenu>
                 </ul>
             </div>
         </div>

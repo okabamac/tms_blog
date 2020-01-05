@@ -1,8 +1,21 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { css } from "@emotion/core"
+import styled from "@emotion/styled"
 import Layout from "../components/Layout";
 
+const Div = styled.div`
+    position: relative;
+    top: 1em;
+    line-height: 1.5;
+    word-wrap: break-word;
+  img {
+    position: relative;
+    margin 1em auto;
+    max-width: 100%;
+    min-height: 350px;
+  }
+`
 const Template = ({data, pageContext}) => {
   const {next, prev } = pageContext;
   const { markdownRemark } = data // data.markdownRemark holds your post data
@@ -27,13 +40,7 @@ const Template = ({data, pageContext}) => {
            opacity: 0.4;
         `}>{frontmatter.author}</h4>
         </div>
-        <div
-          css={css`
-            position: relative;
-            top: 1em;
-            line-height: 1.5;
-            word-wrap: break-word;
-          `}
+        <Div
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
@@ -45,6 +52,7 @@ const Template = ({data, pageContext}) => {
                 position: relative;
                 display: inline-block;
                 left: 0;
+                margin-bottom: 2em;
               `}>
             {next && <Link to={next.frontmatter.path}>Next</Link>}
           </div>
@@ -52,6 +60,7 @@ const Template = ({data, pageContext}) => {
                 position: absolute;
                 display: inline-block;
                 right: 0;
+                margin-bottom: 2em;
               `}>
             {prev && <Link to={prev.frontmatter.path}>Pevious</Link>}
           </div>
