@@ -1,9 +1,11 @@
 import React from "react";
 import { css } from "@emotion/core";
+import styled from "@emotion/styled";
 import { Link, graphql } from "gatsby";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/Layout";
+
 
 export default ({ data }) => {
   return (

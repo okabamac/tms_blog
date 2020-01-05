@@ -1,10 +1,39 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faFacebook, faInstagram} from '@fortawesome/free-brands-svg-icons'
-import { css } from "@emotion/core"
-import { Link } from "gatsby"
-import '../../static/styles/index.css'
-import visualizer from '../../static/images/visualizer.svg';
+import { faTwitter, faFacebook, faInstagram} from "@fortawesome/free-brands-svg-icons";
+import { css } from "@emotion/core";
+import styled from '@emotion/styled';
+import { Link } from "gatsby";
+import "../../static/styles/index.css";
+import visualizer from "../../static/images/visualizer.svg";
+
+
+const ListSocial = styled.li
+  `
+   transition: all 200ms ease-in-out;
+    &:hover {
+      font-size: 110%;
+      &:nth-child(1) {
+        color: #0166c4;
+      }
+      &:nth-child(2) {
+        color: #4d97ff;
+      }
+      &:nth-child(3) {
+        color: #f12711;
+      }
+    }
+    a {
+      margin: 0.2em;
+    }
+  `
+const ListMenu = styled.li
+  `
+   transition: all 200ms ease-in-out;
+    &:hover {
+      color: #f12711;
+    }
+  `
 
 export default () => {
   return (
@@ -22,6 +51,8 @@ export default () => {
                 top: 0;
                 height: 60px;
                 width: 100vw;
+                -webkit-box-shadow: 5px 2px 3px 2px #777473;
+                box-shadow: 5px 2px 3px 2px #777473;
                 background: #f12711;  /* fallback for old browsers */
                 background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
                 background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -62,7 +93,7 @@ export default () => {
           display: inline-block;
           margin-left: 0.2em;
         `}>
-          <img src={visualizer} css={css`
+          <img alt="Audio Visualizer" src={visualizer} css={css`
             margin: 0 0 -2.2em 0.55em;
           `}/>
           <h1 css={css`
@@ -74,15 +105,15 @@ export default () => {
            </div>
         <section>
           <ul className="home-menu">
-            <li>
+            <ListMenu>
               <Link to='/about'>About</Link>
-            </li>
-            <li>
+            </ListMenu>
+            <ListMenu>
               <Link to='/blog'>Blog</Link>
-            </li>
-            <li>
+            </ListMenu>
+            <ListMenu>
               <Link to='/contact'>Contact</Link>
-            </li>
+            </ListMenu>
           </ul>
         </section>
       </div>
@@ -93,21 +124,21 @@ export default () => {
         width: 100vw;
         `}>
         <ul>
-          <li>
+          <ListSocial>
             <Link>
               <FontAwesomeIcon icon={faFacebook} />
             </Link>
-          </li>
-          <li>
+          </ListSocial>
+          <ListSocial>
             <Link>
               <FontAwesomeIcon icon={faTwitter} />
             </Link>
-          </li>
-          <li>
+          </ListSocial>
+          <ListSocial>
             <Link>
               <FontAwesomeIcon icon={faInstagram} />
             </Link>
-          </li>
+          </ListSocial>
         </ul>
       </section>
     </main>

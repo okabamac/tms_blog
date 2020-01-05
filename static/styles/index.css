@@ -13,6 +13,7 @@
 body {
     height: 100%;
     font-family: 'Philosopher', serif;
+    overflow-x: hidden;
 }
 
 li a {
@@ -51,4 +52,3 @@ li {
 .home-menu li:nth-child(3):after {
       left: -0.1em;
 }
-

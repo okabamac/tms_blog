@@ -22,6 +22,8 @@
     "@fortawesome/react-fontawesome": "^0.1.8",
     "gatsby": "^2.18.12",
     "gatsby-plugin-emotion": "^4.1.18",
+    "gatsby-plugin-sharp": "^2.3.10",
+    "gatsby-remark-images": "^3.1.39",
     "gatsby-source-filesystem": "^2.1.42",
     "gatsby-transformer-remark": "^2.6.44",
     "lodash": "^4.17.15",
