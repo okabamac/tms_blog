@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faPaperPlane, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/Layout";
 
 const Div = styled.div`
 line-height: 1.5;
 position: relative;
-margin-bottom: 1em;
 word-break: break-word;
 display: block;
-width: 100%;
+margin: 0 auto 1em auto;
+width: 90%;
 padding: 0.4em;
 input {
     outline: none;
