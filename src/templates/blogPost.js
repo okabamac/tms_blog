@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
 import Layout from "../components/Layout";
+import Footer from "../components/Subscription";
 
 const Div = styled.div`
     position: relative;
@@ -21,6 +22,7 @@ const Template = ({data, pageContext}) => {
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
     return (
+      <>
       <Layout>
       <div>
         <h2>{frontmatter.title}</h2>
@@ -52,7 +54,6 @@ const Template = ({data, pageContext}) => {
                 position: relative;
                 display: inline-block;
                 left: 0;
-                margin-bottom: 2em;
               `}>
             {next && <Link to={next.frontmatter.path}>Next</Link>}
           </div>
@@ -60,12 +61,13 @@ const Template = ({data, pageContext}) => {
                 position: absolute;
                 display: inline-block;
                 right: 0;
-                margin-bottom: 2em;
               `}>
             {prev && <Link to={prev.frontmatter.path}>Pevious</Link>}
           </div>
         </div>
     </Layout>
+      <Footer />
+    </>
   )
 }
 export const pageQuery = graphql`
