@@ -71,13 +71,31 @@ const Section = styled.section`
         justify-content: center;
         text-align: center;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        svg {
+            animation: submitResultShow 1s ease-in-out;
+            animation-fill-mode: forwards;
+            }
+        @keyframes submitResultShow {
+        0% {
+            transform: scale(2);
+            opacity: 0.2;
+            }
+        70% {
+            transform: scale(0.7);
+            opacity: 0.6;
+            }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+            }
+        }
         @media (max-width: 1024px) {
         position: relative;
         top: -1em;
         left: 0.1em;
         }
 `
-const Footer = ({ data }) => {
+const Subscription = ({ data }) => {
     const [formFields, setFormFields] = useState({
         email: "",
     });
@@ -101,7 +119,7 @@ const Footer = ({ data }) => {
                 setBtnAnimation(false);
                 setSubmitResult({
                     success: true,
-                    message: "Thanks for subscribing!",
+                    message: "Thanks for subscribing! Please check your mail for verification",
                 });
                 setFormFields({
                     email: "",
@@ -161,4 +179,4 @@ const Footer = ({ data }) => {
     )
 }
 
-export default Footer
+export default Subscription;

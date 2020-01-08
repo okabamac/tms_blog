@@ -6,8 +6,13 @@
 
 module.exports = {
   siteMetadata: {
-    title: "TMS Blog",
-    description: "The Mystery of Sound"
+    title: "The Mystery of Sound",
+    titleTemplate: "%s · Revealing Sound",
+    description:
+      "The Mystery of Sound is a music forum where excellence and rudiments of music is taught",
+    url: "https://www.themysteryofsound.com", // No trailing slash allowed!
+    image: "./static/images/tms.jpg", // Path to your image you placed in the 'static' folder
+    twitterUsername: "@themysteryofsound",
   },
   plugins: [
     `gatsby-plugin-sharp`,
