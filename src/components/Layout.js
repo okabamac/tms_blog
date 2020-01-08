@@ -14,6 +14,11 @@ export default ({ children }) => (
         background-color: #fff;
         `}>
             {children}
+            {/* <footer>
+                © {new Date().getFullYear()}, Built with
+          {` `}
+                <a href="https://www.gatsbyjs.org">Gatsby</a>
+            </footer> */}
         </section>
     </>
 )
