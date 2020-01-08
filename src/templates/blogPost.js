@@ -2,6 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { css } from "@emotion/core"
 import styled from "@emotion/styled"
+import { DiscussionEmbed } from "disqus-react"
 import Layout from "../components/Layout"
 import SEO from '../components/SEO'
 import Footer from "../components/Subscription"
@@ -22,6 +23,10 @@ const Template = ({data, pageContext}) => {
   const {next, previous } = pageContext;
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
+  const disqusConfig = {
+    shortname: process.env.GATSBY_DISQUS_NAME,
+    config: { identifier: markdownRemark.frontmatter.path, title: markdownRemark.frontmatter.title },
+  }
     return (
       <>
       <Layout>
@@ -54,34 +59,49 @@ const Template = ({data, pageContext}) => {
         color: blue;
         margin-bottom: 2em;
         `}>
-            <ul
-              style={{
-                position: `relative`,
-                display: `flex`,
-                flexWrap: `wrap`,
-                justifyContent: `space-between`,
-                listStyle: `none`,
-                padding: 0,
-              }}
-            >
-              <li>
+            <ul css={css`
+            position: relative;
+            color: #333;
+            list-style: none;
+            padding: 0.5em 0;
+            width: 100%;
+            margin-bottom: 2em;
+            `}>
+              <li css={css`
+              position: absolute;
+              left: -1em;
+              line-height: 1.5;
+              text-align: left;
+              `}>
                 {previous && (
-                  <Link to={previous.frontmatter.path} rel="prev">
-                    ← {previous.frontmatter.title}
-                  </Link>
+                  <>
+                    <p>Previous</p>
+                    <Link css={css`color: blue`} to={previous.frontmatter.path} rel="prev">
+                      ← {previous.frontmatter.title}
+                    </Link>
+                  </>
                 )}
               </li>
-              <li>
+              <li css={css`
+              position: absolute;
+              right: 0;
+              line-height: 1.5;
+              text-align: right;
+              `}>
                 {next && (
-                  <Link to={next.frontmatter.path} rel="next">
-                    {next.frontmatter.title} →
+                  <>
+                    <p>Next</p>
+                    <Link css={css`color: blue`} to={next.frontmatter.path} rel="next">
+                      {next.frontmatter.title} →
               </Link>
+              </>
                 )}
               </li>
             </ul>
         </div>
     </Layout>
       <Footer />
+      {/* <DiscussionEmbed {...disqusConfig} /> */}
     </>
   )
 }

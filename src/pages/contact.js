@@ -9,8 +9,8 @@ line-height: 1.5;
 position: relative;
 word-break: break-word;
 display: block;
-margin: 0 auto 1em auto;
-width: 90%;
+margin-bottom: 1.2em;
+width: 100%;
 padding: 0.4em;
 input {
     outline: none;
@@ -71,7 +71,7 @@ button {
 const Feedback  = styled.section `
                     position: relative;
                     width: 100%;
-                    min-height: 40vh;
+                    min-height: 45vh;
                     font-size: 120%;
                     position: relative;
                     width: 100%;
@@ -174,7 +174,10 @@ const Contact = () => {
                 <Div>
                     <h2>Contact Us</h2>
                 </Div>
-                <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} method="post" netlify-honeypot="bot-field" data-netlify="true">
+                        <Div>
+                        <input type="hidden" name="bot-field" />
+                        </Div>
                     <Div>
                         <input
                             type="text"
