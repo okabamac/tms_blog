@@ -6,7 +6,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import Layout from '../components/Layout'
 import SEO from '../components/SEO'
 
-const BlogPost = ({ data, pageContext }) => {
+const BlogPost = (props) => {
+  const { data, pageContext, location } = props
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark
     const { currentPage, numPages } = pageContext
@@ -16,7 +17,7 @@ const BlogPost = ({ data, pageContext }) => {
     const nextPage = (currentPage + 1).toString()
 
     return (
-          <Layout>
+      <Layout location={location} title={siteTitle}>
             <SEO
               title={siteTitle}
               keywords={[`music`, `sound`, `rhythm`, `keys`]}
@@ -45,7 +46,8 @@ const BlogPost = ({ data, pageContext }) => {
             `}>
                 <h4
                   css={css`
-                  margin-bottom: "0.2em";
+                  position: relative;
+                  margin-bottom: "1em";
                 `}
                 >
                   {node.frontmatter.title}{" "}
@@ -57,8 +59,23 @@ const BlogPost = ({ data, pageContext }) => {
                     — {node.frontmatter.date}
                   </span>
                 </h4>
+              {node.frontmatter.tags.map(tag => {
+                return <span key={tag} css={css`
+              position: relative;
+              padding: 0.2em;
+              color: #fff;
+              margin-right: 0.5em;
+              top: 0.4em;
+              background-color: #ddd;
+              `}>
+                <Link css={css`
+                 text-decoration: none;
+                `}to={`/tags/${tag}`}>{tag}</Link>
+              </span>
+              })}
                 <p css={css`
                 line-height: 1.5;
+                margin-top: 0.5em;
                 word-wrap: break-word;
                 `}>{node.excerpt}</p>
               <Link
@@ -69,7 +86,7 @@ const BlogPost = ({ data, pageContext }) => {
                 color: #0e52a5;
                 top: 0.2em;
               `}
-              >Read <FontAwesomeIcon css={css`
+              >Read More <FontAwesomeIcon css={css`
                 color: #4d97ff;
                 font-size: 80%;
               `} icon={faArrowRight} />
@@ -80,8 +97,9 @@ const BlogPost = ({ data, pageContext }) => {
             <ul
               style={{
                 position: "relative",
-                top: "2em",
+                bottom: "1.5em",
                 left: "-1em",
+                top: "-.5em",
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',

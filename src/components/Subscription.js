@@ -6,7 +6,7 @@ import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 const Div = styled.div`
 line-height: 1.5;
 position: relative;
-margin-bottom: 0.5em;
+margin-bottom: 0.7em;
 word-break: break-word;
 display: block;
 width: 100%;
@@ -20,7 +20,7 @@ input {
 }
 label {
     position: absolute;
-    top: 0.5em;
+    top: 0.7em;
     left: 0;
     padding-left: 0.7em;
     transition: all 200ms;
@@ -28,7 +28,7 @@ label {
 }
 input:focus+label,
 input:valid+label {
-    transform: translate3d(-3%, -97%, 0);
+    transform: translate3d(-3%, -105%, 0);
     opacity: 1;
     font-size: 105%;
 }
@@ -91,7 +91,11 @@ const Section = styled.section`
         }
         @media (max-width: 1024px) {
         position: relative;
-        top: -1em;
+        top: 2.5em;
+        height: 50%;
+        padding-top: 1em;
+        margin-bottom: 1em;
+        background-color: #fff;
         left: 0.1em;
         }
 `

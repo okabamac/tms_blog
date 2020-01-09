@@ -1,6 +1,7 @@
 import React from "react";
 import styled from '@emotion/styled';
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 import introductionImg from "../../static/images/feature-icon-01.svg";
 import purposeImg from "../../static/images/feature-icon-02.svg";
 import visionImg from "../../static/images/feature-icon-03.svg";
@@ -17,9 +18,15 @@ const style = {
     marginLeft: "0.25em",
     marginBottom: "-0.2em",
 };
-export default () => {
+export default (props) => {
+    const { data, location } = props
+    const siteTitle = data.site.siteMetadata.title
     return (
-        <Layout>
+        <Layout location={location} title={siteTitle}>
+            <SEO
+                title={siteTitle}
+                keywords={[`music`, `sound`, `rhythm`, `keys`]}
+            />
             <section>
             <Div>
                 <h2>Introduction <img alt="Introduction" style={style} src={introductionImg}/></h2>
@@ -51,3 +58,13 @@ export default () => {
        </Layout>
     )
 }
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
