@@ -19,8 +19,10 @@ const Div = styled.div`
     min-height: 350px;
   }
 `
-const Template = ({data, pageContext}) => {
-  const {next, previous } = pageContext;
+const Template = (props) => {
+  const { data, pageContext, location } = props
+  const siteTitle = data.site.siteMetadata.title
+  const {next, previous } = pageContext
   const { markdownRemark } = data // data.markdownRemark holds your post data
   const { frontmatter, html } = markdownRemark
   const disqusConfig = {
@@ -29,7 +31,7 @@ const Template = ({data, pageContext}) => {
   }
     return (
       <>
-      <Layout>
+        <Layout location={location} title={siteTitle}>
           <SEO title={markdownRemark.frontmatter.title} description={markdownRemark.excerpt} />
       <div>
         <h2>{frontmatter.title}</h2>
@@ -49,6 +51,20 @@ const Template = ({data, pageContext}) => {
            opacity: 0.4;
         `}>{frontmatter.author}</h4>
         </div>
+            {markdownRemark.frontmatter.tags.map(tag => {
+              return <span key={tag} css={css`
+              position: relative;
+              padding: 0.2em;
+              color: #fff;
+              margin-right: 0.5em;
+              top: 0.4em;
+              background-color: #ddd;
+              `}>
+                <Link css={css`
+                 text-decoration: none;
+                `} to={`/tags/${tag}`}>{tag}</Link>
+              </span>
+            })}
         <Div
           dangerouslySetInnerHTML={{ __html: html }}
         />
@@ -65,7 +81,7 @@ const Template = ({data, pageContext}) => {
             list-style: none;
             padding: 0.5em 0;
             width: 100%;
-            margin-bottom: 2em;
+            margin-bottom: 6em;
             `}>
               <li css={css`
               position: absolute;
@@ -109,6 +125,11 @@ export default Template;
 
 export const pageQuery = graphql`
   query($pathSlug: String!) {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     markdownRemark(frontmatter: { path: { eq: $pathSlug } }) {
       html
       frontmatter {

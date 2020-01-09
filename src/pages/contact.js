@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 
 const Div = styled.div`
 line-height: 1.5;
@@ -103,7 +104,9 @@ const Feedback  = styled.section `
                     }
 `
 
-const Contact = () => {
+const Contact = (props) => {
+    const { data, pageContext, location } = props
+    const siteTitle = data.site.siteMetadata.title
     const [formFields, setFormFields] = useState({
         name: "",
         email: "",
@@ -159,7 +162,11 @@ const Contact = () => {
         });
     };
     return (
-        <Layout>
+        <Layout location={location} title={siteTitle}>
+            <SEO
+                title={siteTitle}
+                keywords={[`music`, `sound`, `rhythm`, `keys`]}
+            />
             {submitResult ? (
                 submitResult.success ? <Feedback>
                     <span><FontAwesomeIcon icon={faCheck} /><br />{submitResult.message}</span>
@@ -216,5 +223,13 @@ const Contact = () => {
         </Layout>
     )
 }
-
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
 export default Contact;

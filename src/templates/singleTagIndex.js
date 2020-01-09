@@ -2,18 +2,24 @@ import React from "react"
 import PropTypes from "prop-types"
 import { css } from "@emotion/core";
 import { Link, graphql } from "gatsby";
-import { kebabCase } from "lodash";
 import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 
-const Tags = ({ pageContext, data }) => {
+const Tags = (props) => {
+  const { data, pageContext, location } = props
     const { tag } = pageContext
     const { edges, totalCount } = data.allMarkdownRemark
     const tagHeader = `${totalCount} post${
         totalCount === 1 ? "" : "s"
         } tagged with "${tag}"`
 
-    return (
-        <Layout>
+  const siteTitle = data.site.siteMetadata.title
+  return (
+    <Layout location={location} title={siteTitle}>
+      <SEO
+        title={siteTitle}
+        keywords={[`music`, `sound`, `rhythm`, `keys`]}
+      />
             <h1>{tagHeader}</h1>
             <ul>
                 {edges.map(({ node }) => {
@@ -70,6 +76,11 @@ export default Tags
 
 export const pageQuery = graphql`
   query($tag: String) {
+     site {
+      siteMetadata {
+        title
+      }
+    }
     allMarkdownRemark(
       limit: 2000
       sort: { fields: [frontmatter___date], order: DESC }

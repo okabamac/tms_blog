@@ -6,6 +6,8 @@ import styled from '@emotion/styled';
 import { Link } from "gatsby";
 import "../../static/styles/index.css";
 import visualizer from "../../static/images/visualizer.svg";
+import Layout from "../components/Layout";
+import SEO from "../components/SEO";
 
 
 const ListSocial = styled.li
@@ -35,17 +37,15 @@ const ListMenu = styled.li
     }
   `
 
-export default () => {
+export default (props) => {
+  const { data, location } = props
+  const siteTitle = data.site.siteMetadata.title
   return (
-    <main css={css`
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align:center;
-      justify-content: center;
-      font-size: calc(5px + 2vmin);
-    `}>
+    <Layout location={location} title={siteTitle}>
+      <SEO
+        title={siteTitle}
+        keywords={[`music`, `sound`, `rhythm`, `keys`]}
+      />
       <div css={css`
                 position: absolute;
                 top: 0;
@@ -141,6 +141,16 @@ export default () => {
           </ListSocial>
         </ul>
       </section>
-    </main>
+    </Layout>
   )
 }
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
